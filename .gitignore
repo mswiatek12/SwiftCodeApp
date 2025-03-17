@@ -1,0 +1,19 @@
+# Ignore PostgreSQL data directory
+pg_data/
+pg_data_test/
+pg_wal/
+pg_stat/
+pg_xlog/
+
+# Ignore Go binaries
+*.exe
+*.out
+*.test
+
+# Ignore other system files
+.DS_Store
+Thumbs.db
+
+# Ignore Docker related files
+docker-compose.yml
+*.env
