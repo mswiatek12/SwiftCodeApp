@@ -1,0 +1,90 @@
+services:
+  swiftcode_app:
+    build:
+      context: /home/swistek/swiftCodeService/SwiftCodeApp
+      dockerfile: Dockerfile
+    container_name: swiftcode_app
+    depends_on:
+      postgres:
+        condition: service_healthy
+        required: true
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: "/app/credentials.json"
+      SPREADSHEET_ID: 1iFFqsu_xruvVKzXAadAAlDBpIuU51v-pfIEU5HeGa8w
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /home/swistek/swiftCodeService/SwiftCodeApp/config
+        target: /config
+        bind:
+          create_host_path: true
+
+  postgres:
+    container_name: postgresdb
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: s0meStr0ngP@ssword
+      POSTGRES_DB: postgresdb
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pg_isready -U postgres'
+      timeout: 5s
+      interval: 10s
+      retries: 5
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5433"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+    networks:
+      default: null
+
+  postgres_test:
+    container_name: postgresdb_test
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: s0meStr0ngP@ssword
+      POSTGRES_DB: postgresdb_test
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pg_isready -U postgres'
+      timeout: 5s
+      interval: 10s
+      retries: 5
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5434"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: postgres_test_data
+        target: /var/lib/postgresql/data
+    networks:
+      default: null
+
+networks:
+  default:
+    name: swiftcodeapp_default
+
+volumes:
+  postgres_data:
+    name: swiftcodeapp_postgres_data
+  postgres_test_data:
+    name: swiftcodeapp_postgres_test_data
