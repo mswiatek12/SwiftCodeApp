@@ -1,7 +1,7 @@
 services:
   swiftcode_app:
     build:
-      context: /home/swistek/swiftCodeService/SwiftCodeApp
+      context: ../SwiftCodeApp
       dockerfile: Dockerfile
     container_name: swiftcode_app
     depends_on:
@@ -20,7 +20,7 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: /home/swistek/swiftCodeService/SwiftCodeApp/config
+        source: ./config
         target: /config
         bind:
           create_host_path: true
