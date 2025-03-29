@@ -100,14 +100,14 @@ go test -v ./tests/...
     "countryName":      "string",
     "swiftCodes": [
         {
-            "address":          "string",
+             "address":         "string",
     		 "bankName":        "string",
     		 "countryISO2":     "string",
     		 "isHeadquarter":   "bool",
     		 "swiftCode":       "string"
         },
         {
-            "address":          "string",
+             "address":         "string",
     		 "bankName":        "string",
     		 "countryISO2":     "string",
     		 "isHeadquarter":   "bool",
