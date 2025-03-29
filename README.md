@@ -28,6 +28,7 @@ cd SwiftCodeApp
 
 ### 2. Obtain Google API Credentials
 The application interacts with Google Sheets. You need to download Google API credentials:
+./google-credentials-setup.md
 
 1. Visit [Google Cloud Console](https://console.cloud.google.com/).
 2. Create or select a project.
