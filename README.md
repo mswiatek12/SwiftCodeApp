@@ -94,6 +94,28 @@ go test -v ./tests/...
 
 ### Retrieve all SWIFT codes for a country
 **GET** `/v1/swift-codes/country/{countryISO2code}`
+```json
+{
+    "countryISO2": "string",
+    "countryName": "string",
+    "swiftCodes": [
+        {
+            "address": "string",
+    		 "bankName": "string",
+    		 "countryISO2": "string",
+    		 "isHeadquarter": "bool",
+    		 "swiftCode": "string"
+        },
+        {
+            "address": "string",
+    		 "bankName": "string",
+    		 "countryISO2": "string",
+    		 "isHeadquarter": "bool",
+    		 "swiftCode": "string"
+        }, . . .
+    ]
+}
+```
 
 ### Add a new SWIFT code
 **POST** `/v1/swift-codes`
